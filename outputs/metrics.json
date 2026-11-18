@@ -1,0 +1,53 @@
+{
+  "n_asteroids": 6000,
+  "n_hazardous": 1116,
+  "hazardous_share": 0.186,
+  "model_a": {
+    "features": [
+      "closest_miss_au",
+      "fastest_velocity_km_s",
+      "eccentricity",
+      "inclination_deg",
+      "semi_major_axis_au",
+      "perihelion_distance_au",
+      "aphelion_distance_au",
+      "orbital_period_days"
+    ],
+    "precision": 0.5405,
+    "recall": 0.4484,
+    "confusion": {
+      "tn": 892,
+      "fp": 85,
+      "fn": 123,
+      "tp": 100
+    }
+  },
+  "model_b": {
+    "features": [
+      "moid_au",
+      "absolute_magnitude_h"
+    ],
+    "rules": [
+      {
+        "node": 0,
+        "feature": "moid_au",
+        "threshold": 0.0499
+      },
+      {
+        "node": 1,
+        "feature": "absolute_magnitude_h",
+        "threshold": 22.045
+      }
+    ],
+    "precision": 1.0,
+    "recall": 0.9865,
+    "confusion": {
+      "tn": 977,
+      "fp": 0,
+      "fn": 3,
+      "tp": 220
+    }
+  },
+  "nasa_rule_agreement": 0.997,
+  "seed": 42
+}

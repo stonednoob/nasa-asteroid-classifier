@@ -1,0 +1,30 @@
+﻿Asteroids: 6000
+Class balance:
+  hazardous      1116 (18.6%)
+  not hazardous  4884 (81.4%)
+
+Stratified split: 4800 train / 1200 test (223 hazardous in test)
+Model A features: ['closest_miss_au', 'fastest_velocity_km_s', 'eccentricity', 'inclination_deg', 'semi_major_axis_au', 'perihelion_distance_au', 'aphelion_distance_au', 'orbital_period_days']
+
+Model A - random forest (no MOID / H / diameter)
+  hazardous precision 0.541   recall 0.448
+  confusion matrix (rows = true, cols = predicted)
+                 safe  hazardous
+    safe          892         85
+    hazardous     123        100
+
+Model B features: ['moid_au', 'absolute_magnitude_h']
+
+Model B - decision tree, depth 2 (MOID + H)
+  hazardous precision 1.000   recall 0.987
+  confusion matrix (rows = true, cols = predicted)
+                 safe  hazardous
+    safe          977          0
+    hazardous       3        220
+  split thresholds:
+    node 0: moid_au <= 0.0499
+    node 1: absolute_magnitude_h <= 22.045
+
+NASA rule (MOID <= 0.05 au and H <= 22.0) agrees with the label on 99.70% of rows
+
+Saved charts and metrics to outputs
